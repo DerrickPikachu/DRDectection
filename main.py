@@ -1,16 +1,25 @@
-# This is a sample Python script.
+import torchvision
+from torch import nn
+from torch.utils.data import DataLoader
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+from parameter import *
+from loop import train_model
+from dataloader import RetinopathyLoader
+from imgTransform import ImgToTorch
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
+    model = torchvision.models.resnet50(pretrained=True)
+    model.fc = nn.Sequential(nn.Linear(in_features=2048, out_features=5, bias=True))
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    train_data = RetinopathyLoader('data', 'train', transform=ImgToTorch())
+    test_data = RetinopathyLoader('data', 'train', transform=ImgToTorch())
+
+    loader = {}
+    loader['train'] = DataLoader(train_data, batch_size=batch_size, shuffle=True)
+    loader['test'] = DataLoader(test_data, batch_size=batch_size, shuffle=True)
+
+    optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate, momentum=momentum, weight_decay=weight_decay)
+
+    train_model(model, loader, loss_fn, optimizer, epoch)
+    # print(model)
