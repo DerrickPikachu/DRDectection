@@ -23,7 +23,8 @@ if __name__ == '__main__':
     loader['train'] = DataLoader(train_data, batch_size=batch_size, shuffle=True)
     loader['test'] = DataLoader(test_data, batch_size=batch_size, shuffle=True)
 
-    optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate, momentum=momentum, weight_decay=weight_decay)
+    # optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate, momentum=momentum, weight_decay=weight_decay)
+    optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate, weight_decay=weight_decay)
 
     train_model(model, loader, loss_fn, optimizer, epoch)
     # print(model)
