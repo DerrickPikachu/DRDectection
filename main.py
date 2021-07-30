@@ -6,15 +6,18 @@ from parameter import *
 from loop import train_model
 from dataloader import RetinopathyLoader
 from imgTransform import ImgToTorch
+from models import ResNet
 
 
 if __name__ == '__main__':
-    model = torchvision.models.resnet50(pretrained=True)
-    model.fc = nn.Sequential(nn.Linear(in_features=2048, out_features=5, bias=True))
+    # model = torchvision.models.resnet50(pretrained=True)
+    # model.fc = nn.Sequential(nn.Linear(in_features=2048, out_features=5, bias=True))
+    # model.to(device)
+    model = ResNet(50, True, True)
     model.to(device)
 
     train_data = RetinopathyLoader('data', 'train', transform=ImgToTorch())
-    test_data = RetinopathyLoader('data', 'train', transform=ImgToTorch())
+    test_data = RetinopathyLoader('data', 'test', transform=ImgToTorch())
 
     loader = {}
     loader['train'] = DataLoader(train_data, batch_size=batch_size, shuffle=True)
