@@ -9,7 +9,7 @@ from imgTransform import ImgToTorch
 
 hyper_var = {
     'Adam': [0.1, 0.01, 0.001],
-    'SGD': [0.001, 0.0001, 0.00001],
+    'SGD': [0.1, 0.01, 0.001],
 }
 
 
