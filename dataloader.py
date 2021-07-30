@@ -7,6 +7,7 @@ import os
 
 from imgTransform import ImgToTorch
 
+
 def getData(mode):
     if mode == 'train':
         img = pd.read_csv('train_img.csv')

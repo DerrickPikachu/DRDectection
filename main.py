@@ -11,6 +11,7 @@ from imgTransform import ImgToTorch
 if __name__ == '__main__':
     model = torchvision.models.resnet50(pretrained=True)
     model.fc = nn.Sequential(nn.Linear(in_features=2048, out_features=5, bias=True))
+    model.to(device)
 
     train_data = RetinopathyLoader('data', 'train', transform=ImgToTorch())
     test_data = RetinopathyLoader('data', 'train', transform=ImgToTorch())
