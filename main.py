@@ -15,6 +15,7 @@ if __name__ == '__main__':
     # model.to(device)
     model = ResNet(18, True, True)
     model.to(device)
+    print(model)
 
     train_data = RetinopathyLoader('data', 'train', transform=ImgToTorch())
     test_data = RetinopathyLoader('data', 'test', transform=ImgToTorch())

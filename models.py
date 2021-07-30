@@ -20,14 +20,17 @@ class ResNet(nn.Module):
     def __init__(self, resnet_depth=50, pretrained=True, feature_extracting=True):
         super(ResNet, self).__init__()
 
+        classifier = None
         self.resnet = None
         if resnet_depth == 18:
             self.resnet = torchvision.models.resnet18(pretrained)
+            classifier = nn.Sequential(nn.Linear(in_features=512, out_features=5))
         elif resnet_depth == 50:
             self.resnet = torchvision.models.resnet50(pretrained)
+            classifier = nn.Sequential(nn.Linear(in_features=2048, out_features=5))
 
         self.setup_feature_extract(feature_extracting)
-        self.resnet.fc = nn.Sequential(nn.Linear(in_features=2048, out_features=5))
+        self.resnet.fc = classifier
 
     def setup_feature_extract(self, feature_extracting):
         if feature_extracting:
