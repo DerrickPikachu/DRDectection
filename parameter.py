@@ -8,9 +8,9 @@ from imgTransform import ImgToTorch
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
 # Test
-epoch = 1
+# epoch = 1
 
-# epoch = 10
+epoch = 10
 batch_size = 4
 learning_rate = 0.001
 loss_fn = torch.nn.CrossEntropyLoss()
@@ -34,9 +34,9 @@ test_transform = transforms.Compose([
 ])
 
 # Test
-train_data = RetinopathyLoader('data', 'test', transform=train_transform)
+# train_data = RetinopathyLoader('data', 'test', transform=train_transform)
 
-# train_data = RetinopathyLoader('data', 'train', transform=train_transform)
+train_data = RetinopathyLoader('data', 'train', transform=train_transform)
 test_data = RetinopathyLoader('data', 'test', transform=test_transform)
 
 loader = {'train': DataLoader(train_data, batch_size=batch_size, shuffle=True, num_workers=4),

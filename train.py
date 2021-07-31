@@ -55,6 +55,7 @@ def train_with_new_transform():
         '18': [0.001],
         '50': [0.01, 0.001],
     }
+    file = open('transform_record', 'w')
 
     for res_t, lr_list in train_config.items():
         for lr in lr_list:
@@ -66,10 +67,10 @@ def train_with_new_transform():
             model, record = train_model(model, loader, loss_fn, optimizer, epoch)
 
             # Save the data and record
-            file = open('transform_record', 'w')
             file.write(f'{record}\n')
-            file.close()
             torch.save(model, f'{res_t}_{lr}.pth')
+
+    file.close()
 
 
 if __name__ == '__main__':
