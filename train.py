@@ -8,8 +8,8 @@ from dataloader import RetinopathyLoader
 from imgTransform import ImgToTorch
 
 hyper_var = {
-    'Adam': [0.1, 0.01, 0.001],
-    'SGD': [0.1, 0.01, 0.001],
+    'Adam': [0.001],
+    'SGD': [0.001],
 }
 
 
@@ -37,12 +37,13 @@ if __name__ == '__main__':
                 else:
                     optimizer = torch.optim.SGD(model.parameters(), lr=lr, momentum=momentum, weight_decay=weight_decay)
 
-                _, record = train_model(model, loader, loss_fn, optimizer, epoch)
+                model, record = train_model(model, loader, loss_fn, optimizer, epoch)
                 # record = {
                 #     'train': [1, 2, 3, 4, 5],
                 #     'test': [5, 4, 3, 2, 1],
                 # }
                 file.write(f'type: {model_type}, opt: {opt}, lr: {lr}\n')
                 file.write(f'{record}\n')
+                torch.save(model, f'{model_type}_{opt}_{lr}.pth')
 
     file.close()

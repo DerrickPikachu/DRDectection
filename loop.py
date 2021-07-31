@@ -42,7 +42,7 @@ def train_model(model, dataloader, loss_fn, optimizer, epochs):
                         loss.backward()
                         optimizer.step()
 
-                accumulate_loss += loss.item()
+                accumulate_loss += loss.item() * img.size(0)
                 corrects += (pred.argmax(dim=1) == label).type(torch.long).sum().item()
 
                 if batch % 100 == 0:
