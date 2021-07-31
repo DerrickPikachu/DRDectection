@@ -19,7 +19,7 @@ if __name__ == '__main__':
     test_data = RetinopathyLoader('data', 'test', ImgToTorch())
 
     loader = {'train': DataLoader(train_data, batch_size=batch_size, num_workers=4),
-              'test': DataLoader(train_data, batch_size=batch_size, num_workers=4)}
+              'test': DataLoader(test_data, batch_size=batch_size, num_workers=4)}
 
     for model_type in ['pretrained', 'no_pretrained']:
         for opt, lr_list in hyper_var.items():
