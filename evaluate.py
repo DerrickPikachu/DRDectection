@@ -19,11 +19,11 @@ def evaluate(model, loader, loss):
     corrects = 0
 
     for (img, label) in loader:
-        img.to(device)
-        label.to(device)
+        img = img.to(device)
+        label = label.to(device)
 
         with torch.set_grad_enabled(False):
-            pred = model(img)
+            pred = model(img.float())
             loss_val = loss(pred, label)
 
         accumulate_loss += loss_val.item() * img.size(0)
@@ -32,11 +32,11 @@ def evaluate(model, loader, loss):
     accumulate_loss /= size
     corrects /= size
 
-    print(f'Acc: {accumulate_loss}, loss: {corrects}\n')
+    print(f'Acc: {corrects}, loss: {accumulate_loss}\n')
 
 
 if __name__ == "__main__":
-    test_data = RetinopathyLoader('data', 'test', ImgToTorch)
+    test_data = RetinopathyLoader('data', 'test', ImgToTorch())
     test_loader = DataLoader(test_data, batch_size=batch_size)
 
     for model_type in ['pretrained', 'no_pretrained']:
