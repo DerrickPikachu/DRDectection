@@ -1,4 +1,5 @@
 import torchvision
+from torchvision import transforms
 from torch import nn
 from torch.utils.data import DataLoader
 
@@ -17,15 +18,17 @@ if __name__ == '__main__':
     model.to(device)
     print(model)
 
-    train_data = RetinopathyLoader('data', 'train', transform=ImgToTorch())
-    test_data = RetinopathyLoader('data', 'test', transform=ImgToTorch())
-
-    loader = {}
-    loader['train'] = DataLoader(train_data, batch_size=batch_size, shuffle=True)
-    loader['test'] = DataLoader(test_data, batch_size=batch_size, shuffle=True)
-
+    # Init optimizer
     optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate, momentum=momentum, weight_decay=weight_decay)
     # optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate, weight_decay=weight_decay)
 
-    train_model(model, loader, loss_fn, optimizer, epoch)
-    # print(model)
+    # Training start
+    model, record = train_model(model, loader, loss_fn, optimizer, epoch)
+
+    # Write the record into file
+    file = open('single_model_record', 'w')
+    file.write(f'{record}')
+    file.close()
+
+    # Save the trained model
+    torch.save(model, 'model.pth')
