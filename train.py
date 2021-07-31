@@ -26,7 +26,7 @@ if __name__ == '__main__':
             for lr in lr_list:
                 model = None
                 if model_type == 'pretrained':
-                    model = ResNet(resnet_depth=18, pretrained=True, feature_extracting=True)
+                    model = ResNet(resnet_depth=18, pretrained=True, feature_extracting=False)
                 else:
                     model = ResNet(resnet_depth=18, pretrained=False, feature_extracting=False)
                 model.to(device)
