@@ -18,7 +18,7 @@ def evaluate(model, loader, loss):
     accumulate_loss = 0
     corrects = 0
 
-    for img, label in loader:
+    for (img, label) in loader:
         img.to(device)
         label.to(device)
 
