@@ -41,8 +41,8 @@ class ResNet(nn.Module):
         x = self.resnet(x)
         return x
 
-    def load_state_dict(self, state_dict: 'OrderedDict[str, Tensor]', strict: bool = True):
-        self.resnet.load_state_dict(state_dict=state_dict, strict=strict)
+    # def load_state_dict(self, state_dict: 'OrderedDict[str, Tensor]', strict: bool = True):
+    #     self.resnet.load_state_dict(state_dict=state_dict, strict=strict)
 
 # class ResNet(nn.Module):
 #     def __init__(self, pretrained=True):
