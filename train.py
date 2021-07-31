@@ -15,7 +15,7 @@ hyper_var = {
 
 if __name__ == '__main__':
     file = open('record', 'w')
-    train_data = RetinopathyLoader('data', 'train', ImgToTorch())
+    train_data = RetinopathyLoader('data', 'test', ImgToTorch())
     test_data = RetinopathyLoader('data', 'test', ImgToTorch())
 
     loader = {'train': DataLoader(train_data, batch_size=batch_size),

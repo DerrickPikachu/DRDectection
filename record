@@ -1,0 +1,8 @@
+type: pretrained, opt: Adam, lr: 0.001
+{'train': [0.7237010676156583], 'test': [0.736797153024911]}
+type: pretrained, opt: SGD, lr: 0.001
+{'train': [0.7053380782918149], 'test': [0.7127402135231317]}
+type: no_pretrained, opt: Adam, lr: 0.001
+{'train': [0.7309608540925266], 'test': [0.7335231316725979]}
+type: no_pretrained, opt: SGD, lr: 0.001
+{'train': [0.7262633451957295], 'test': [0.733238434163701]}

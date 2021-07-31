@@ -13,7 +13,7 @@ if __name__ == '__main__':
     # model = torchvision.models.resnet50(pretrained=True)
     # model.fc = nn.Sequential(nn.Linear(in_features=2048, out_features=5, bias=True))
     # model.to(device)
-    model = ResNet(18, True, True)
+    model = ResNet(18, True, False)
     model.to(device)
     print(model)
 
