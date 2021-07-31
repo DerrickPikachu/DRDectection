@@ -51,4 +51,5 @@ if __name__ == "__main__":
                 else:
                     optimizer = torch.optim.SGD(model.parameters(), lr=lr, momentum=momentum, weight_decay=weight_decay)
 
+                print(f'{model_type} {opt} lr={lr}')
                 evaluate(model, test_loader, loss_fn)
