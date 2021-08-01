@@ -53,8 +53,8 @@ def train_model(model, dataloader, loss_f, optimizer, epochs):
                 accumulate_loss += loss.item() * img.size(0)
                 corrects += (pred.argmax(dim=1) == label).type(torch.long).sum().item()
 
-                if batch % 100 == 0:
-                    print('batch[{}] Loss: {:.4f}'.format(batch, loss.item()))
+                # if batch % 100 == 0:
+                #     print('batch[{}] Loss: {:.4f}'.format(batch, loss.item()))
 
             epoch_acc = corrects / size
             epoch_mean_loss = accumulate_loss / size
