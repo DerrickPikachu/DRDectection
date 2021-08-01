@@ -26,7 +26,7 @@ if __name__ == '__main__':
     model, record = train_model(model, loader, loss_fn, optimizer, epoch)
 
     # Write the record into file
-    file = open('single_model_record', 'w')
+    file = open('single_record', 'w')
     file.write(f'{record}')
     file.close()
 

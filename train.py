@@ -15,7 +15,7 @@ hyper_var = {
 
 
 def train_diff_opti():
-    file = open('record', 'w')
+    file = open('past_record/record', 'w')
     # train_data = RetinopathyLoader('data', 'train', ImgToTorch())
     # test_data = RetinopathyLoader('data', 'test', ImgToTorch())
     #
@@ -55,7 +55,7 @@ def train_with_new_transform():
         '18': [0.001],
         '50': [0.01, 0.001],
     }
-    file = open('transform_record', 'w')
+    file = open('past_record/transform_record', 'w')
 
     for res_t, lr_list in train_config.items():
         for lr in lr_list:
