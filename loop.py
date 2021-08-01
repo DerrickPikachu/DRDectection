@@ -77,5 +77,6 @@ def train_model(model, dataloader, loss_f, optimizer, epochs):
 
 def train_model_pretrain(model, loss_f, optimizer, epochs):
     model, _ = train_model(model, pretrain_loader, loss_f, optimizer, epochs)
+    parameter.learning_rate /= 10
     model, record = train_model(model, loader, loss_f, optimizer, epochs)
     return model, record
