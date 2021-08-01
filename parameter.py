@@ -22,13 +22,13 @@ weight_decay = 5e-4
 
 train_transform = transforms.Compose([
     ImgToTorch(),
-    transforms.Resize(256),
+    transforms.Resize(240),
     transforms.RandomCrop(224),
     transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
 ])
 test_transform = transforms.Compose([
     ImgToTorch(),
-    transforms.Resize(256),
+    transforms.Resize(240),
     transforms.CenterCrop(224),
     transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
 ])
