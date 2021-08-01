@@ -53,9 +53,9 @@ def train_diff_opti():
 def train_with_new_transform():
     train_config = {
         '18': [0.001],
-        '50': [0.01, 0.001],
+        '50': [0.001],
     }
-    file = open('past_record/transform_record', 'w')
+    file = open('transform_record', 'w')
 
     for res_t, lr_list in train_config.items():
         for lr in lr_list:
