@@ -24,7 +24,10 @@ class ResNet(nn.Module):
         self.resnet = None
         if resnet_depth == 18:
             self.resnet = torchvision.models.resnet18(pretrained)
-            classifier = nn.Sequential(nn.Linear(in_features=512, out_features=5, bias=True))
+            classifier = nn.Sequential(
+                nn.Linear(in_features=512, out_features=5, bias=True),
+                nn.Dropout(p=0.5)
+            )
         elif resnet_depth == 50:
             self.resnet = torchvision.models.resnet50(pretrained)
             classifier = nn.Sequential(nn.Linear(in_features=2048, out_features=5, bias=True))
