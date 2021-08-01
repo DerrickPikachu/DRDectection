@@ -1,5 +1,7 @@
 import copy
 import torch
+
+import parameter
 from parameter import device
 
 
@@ -10,10 +12,16 @@ def train_model(model, dataloader, loss_fn, optimizer, epochs):
         'train': [],
         'test': [],
     }
+    lr = parameter.learning_rate
 
     for e in range(1, epochs + 1):
         print('Epoch: {}/{}'.format(e, epochs))
         print('-' * 10)
+
+        if e % 4 == 0:
+            lr /= 10
+            optimizer = torch.optim.SGD(model.parameters(), lr=lr,
+                                        momentum=parameter.momentum, weight_decay=parameter.weight_decay)
 
         for mode in ['train', 'test']:
             # Change model mode
