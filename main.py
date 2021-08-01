@@ -4,7 +4,7 @@ from torch import nn
 from torch.utils.data import DataLoader
 
 from parameter import *
-from loop import train_model_pretrain
+from loop import train_model_pretrain, train_model
 from dataloader import RetinopathyLoader
 from imgTransform import ImgToTorch
 from models import ResNet
@@ -23,8 +23,8 @@ if __name__ == '__main__':
     # optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate, weight_decay=weight_decay)
 
     # Training start
-    # model, record = train_model(model, loader, loss_fn, optimizer, epoch)
-    model, record = train_model_pretrain(model, loss_fn, optimizer, epoch)
+    model, record = train_model(model, loader, loss_fn, optimizer, epoch)
+    # model, record = train_model_pretrain(model, loss_fn, optimizer, epoch)
 
     # Write the record into file
     file = open('single_record', 'w')

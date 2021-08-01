@@ -11,7 +11,7 @@ device = 'cuda' if torch.cuda.is_available() else 'cpu'
 # epoch = 1
 
 epoch = 10
-batch_size = 4
+batch_size = 2
 learning_rate = 0.001
 loss_fn = torch.nn.CrossEntropyLoss()
 
