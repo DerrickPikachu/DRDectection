@@ -70,9 +70,29 @@ class RetinopathyLoader(data.Dataset):
         return img, label
 
 
+class PretrainLoader(RetinopathyLoader):
+    def __init__(self, root, mode, transform=None):
+        super(PretrainLoader, self).__init__(root, mode, transform)
+
+        # Leave data that is not belong to class 0
+        no_class0_img = []
+        no_class0_label = []
+        for i in range(len(self.img_name)):
+            if self.label[i] != 0:
+                no_class0_img.append(self.img_name[i])
+                no_class0_label.append(self.label[i])
+
+        self.img_name = np.asarray(no_class0_img)
+        self.label = np.asarray(no_class0_label)
+
+        print("> Found %d images..." % (len(self.img_name)))
+
+
 if __name__ == "__main__":
-    retinopathyData = RetinopathyLoader('data', 'train', transform=ImgToTorch())
-    img, label = retinopathyData[0]
-    plt.figure()
-    plt.imshow(img.numpy().transpose((1, 2, 0)))
-    plt.show()
+    # retinopathyData = RetinopathyLoader('data', 'train', transform=ImgToTorch())
+    # img, label = retinopathyData[0]
+    # plt.figure()
+    # plt.imshow(img.numpy().transpose((1, 2, 0)))
+    # plt.show()
+    no_class0_data = PretrainLoader('data', 'train', transform=ImgToTorch())
+    print(no_class0_data.label)

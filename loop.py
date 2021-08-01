@@ -2,10 +2,10 @@ import copy
 import torch
 
 import parameter
-from parameter import device
+from parameter import *
 
 
-def train_model(model, dataloader, loss_fn, optimizer, epochs):
+def train_model(model, dataloader, loss_f, optimizer, epochs):
     best_weights = copy.deepcopy(model.state_dict())
     best_acc = 0.
     recorder = {
@@ -43,7 +43,7 @@ def train_model(model, dataloader, loss_fn, optimizer, epochs):
                 with torch.set_grad_enabled(mode == 'train'):
                     # Forward pass
                     pred = model(img.float())
-                    loss = loss_fn(pred, label)
+                    loss = loss_f(pred, label)
 
                     # Backward pass
                     if mode == 'train':
@@ -73,3 +73,9 @@ def train_model(model, dataloader, loss_fn, optimizer, epochs):
 
     model.load_state_dict(best_weights)
     return model, recorder
+
+
+def train_model_pretrain(model, loss_f, optimizer, epochs):
+    model, _ = train_model(model, pretrain_loader, loss_f, optimizer, epochs)
+    model, record = train_model(model, loader, loss_f, optimizer, epochs)
+    return model, record
