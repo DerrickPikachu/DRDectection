@@ -14,7 +14,7 @@ from models import ResNet
 if __name__ == '__main__':
     # model = torch.load('model.pth')
     model = ResNet(18, True, False)
-    model.to(device)
+    model = model.to(device)
     print(model)
 
     # Init optimizer
