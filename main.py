@@ -2,6 +2,7 @@ import torchvision
 from torchvision import transforms
 from torch import nn
 from torch.utils.data import DataLoader
+import torch
 
 from parameter import *
 from loop import train_model_pretrain, train_model
@@ -11,10 +12,8 @@ from models import ResNet
 
 
 if __name__ == '__main__':
-    # model = torchvision.models.resnet50(pretrained=True)
-    # model.fc = nn.Sequential(nn.Linear(in_features=2048, out_features=5, bias=True))
-    # model.to(device)
-    model = ResNet(18, True, False)
+    model = torch.load('18_0.001.pth')
+    # model = ResNet(18, True, False)
     model.to(device)
     print(model)
 
