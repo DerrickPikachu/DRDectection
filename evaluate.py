@@ -36,20 +36,23 @@ def evaluate(model, loader, loss):
 
 
 if __name__ == "__main__":
-    test_data = RetinopathyLoader('data', 'test', ImgToTorch())
-    test_loader = DataLoader(test_data, batch_size=batch_size, num_workers=4)
+    model = torch.load('resnet50_epo20.pth')
+    model = model.to(device)
+    evaluate(model, loader, loss_fn)
+    # test_data = RetinopathyLoader('data', 'test', ImgToTorch())
+    # test_loader = DataLoader(test_data, batch_size=batch_size, num_workers=4)
 
-    for model_type in ['pretrained', 'no_pretrained']:
-        for opt, lr_list in hyper_var.items():
-            for lr in lr_list:
-                filename = f'{model_type}_{opt}_{lr}.pth'
-                model = torch.load(filename)
-                model.to(device)
-
-                if opt == 'Adam':
-                    optimizer = torch.optim.Adam(model.parameters(), lr=lr, weight_decay=weight_decay)
-                else:
-                    optimizer = torch.optim.SGD(model.parameters(), lr=lr, momentum=momentum, weight_decay=weight_decay)
-
-                print(f'{model_type} {opt} lr={lr}')
-                evaluate(model, test_loader, loss_fn)
+    # for model_type in ['pretrained', 'no_pretrained']:
+    #     for opt, lr_list in hyper_var.items():
+    #         for lr in lr_list:
+    #             filename = f'{model_type}_{opt}_{lr}.pth'
+    #             model = torch.load(filename)
+    #             model.to(device)
+    #
+    #             if opt == 'Adam':
+    #                 optimizer = torch.optim.Adam(model.parameters(), lr=lr, weight_decay=weight_decay)
+    #             else:
+    #                 optimizer = torch.optim.SGD(model.parameters(), lr=lr, momentum=momentum, weight_decay=weight_decay)
+    #
+    #             print(f'{model_type} {opt} lr={lr}')
+    #             evaluate(model, test_loader, loss_fn)
