@@ -12,14 +12,13 @@ from models import ResNet
 
 
 if __name__ == '__main__':
-    model = torch.load('18_0.001.pth')
+    model = torch.load('model.pth')
     # model = ResNet(18, True, False)
     model.to(device)
     print(model)
 
     # Init optimizer
     optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate, momentum=momentum, weight_decay=weight_decay)
-    # optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate, weight_decay=weight_decay)
 
     # Training start
     model, record = train_model(model, loader, loss_fn, optimizer, epoch)
