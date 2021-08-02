@@ -38,7 +38,7 @@ def evaluate(model, loader, loss):
 if __name__ == "__main__":
     model = torch.load('resnet50_epo20.pth')
     model = model.to(device)
-    evaluate(model, loader, loss_fn)
+    evaluate(model, loader['test'], loss_fn)
     # test_data = RetinopathyLoader('data', 'test', ImgToTorch())
     # test_loader = DataLoader(test_data, batch_size=batch_size, num_workers=4)
 
