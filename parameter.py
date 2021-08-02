@@ -2,7 +2,7 @@ import torch
 from torch.utils.data import DataLoader
 from torchvision import transforms
 
-from dataloader import RetinopathyLoader, PretrainLoader
+from dataloader import RetinopathyLoader, PretrainLoader, EvenLoader
 from imgTransform import ImgToTorch
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
@@ -34,13 +34,15 @@ pretest_transform = transforms.Compose([
 ])
 train_transform = transforms.Compose([
     ImgToTorch(),
-    # transforms.Resize(224),
+    transforms.Resize(224),
+    transforms.RandomHorizontalFlip(),
+    transforms.RandomVerticalFlip(),
     # transforms.RandomCrop(224),
     # transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
 ])
 test_transform = transforms.Compose([
     ImgToTorch(),
-    # transforms.Resize(224),
+    transforms.Resize(224),
     # transforms.CenterCrop(224),
     # transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
 ])
@@ -50,6 +52,8 @@ test_transform = transforms.Compose([
 
 pretrain_data = PretrainLoader('data', 'train', transform=pretrain_transform)
 pretest_data = PretrainLoader('data', 'test', transform=pretest_transform)
+# train_data = RetinopathyLoader('data', 'train', transform=train_transform)
+# test_data = RetinopathyLoader('data', 'test', transform=test_transform)
 train_data = RetinopathyLoader('data', 'train', transform=train_transform)
 test_data = RetinopathyLoader('data', 'test', transform=test_transform)
 

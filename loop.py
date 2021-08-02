@@ -72,7 +72,7 @@ def train_model(model, dataloader, loss_f, optimizer, epochs):
     print('Finish')
     print('Best accuracy: {:4f}%'.format(best_acc))
 
-    # model.load_state_dict(best_weights)
+    model.load_state_dict(best_weights)
     return model, recorder
 
 

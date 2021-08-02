@@ -12,8 +12,8 @@ from models import ResNet
 
 
 if __name__ == '__main__':
-    model = torch.load('model.pth')
-    # model = ResNet(18, True, False)
+    # model = torch.load('model.pth')
+    model = ResNet(18, True, False)
     model.to(device)
     print(model)
 
@@ -30,4 +30,4 @@ if __name__ == '__main__':
     file.close()
 
     # Save the trained model
-    torch.save(model, 'model.pth')
+    torch.save(model, 'random_flip_18.pth')

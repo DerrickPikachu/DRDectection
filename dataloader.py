@@ -33,7 +33,7 @@ class RetinopathyLoader(data.Dataset):
         self.img_name, self.label = getData(mode)
         self.mode = mode
         self.transform = transform
-        print("> Found %d images..." % (len(self.img_name)))
+        # print("> Found %d images..." % (len(self.img_name)))
 
     def __len__(self):
         """'return the size of dataset"""
@@ -85,7 +85,27 @@ class PretrainLoader(RetinopathyLoader):
         self.img_name = np.asarray(no_class0_img)
         self.label = np.asarray(no_class0_label)
 
-        print("> Found %d images..." % (len(self.img_name)))
+        # print("> Found %d images..." % (len(self.img_name)))
+
+
+class EvenLoader(RetinopathyLoader):
+    def __init__(self, root, mode, transform=None):
+        super(EvenLoader, self).__init__(root, mode, transform)
+
+        counter = 3000
+        even_img = []
+        even_label = []
+        for i in range(len(self.img_name)):
+            if self.label[i] != 0 or (self.label[i] == 0 and counter != 0):
+                even_img.append(self.img_name[i])
+                even_label.append(self.label[i])
+                if self.label[i] == 0:
+                    counter -= 1
+
+        self.img_name = np.asarray(even_img)
+        self.label = np.asarray(even_label)
+
+        print("> EvenLoader Found %d images..." % (len(self.img_name)))
 
 
 if __name__ == "__main__":
@@ -94,5 +114,18 @@ if __name__ == "__main__":
     # plt.figure()
     # plt.imshow(img.numpy().transpose((1, 2, 0)))
     # plt.show()
-    no_class0_data = PretrainLoader('data', 'train', transform=ImgToTorch())
-    print(no_class0_data.label)
+
+    # no_class0_data = PretrainLoader('data', 'train', transform=ImgToTorch())
+    # print(no_class0_data.label)
+
+    img_name, label = getData('test')
+    total_size = len(label)
+    counter = np.zeros(5).astype('int')
+
+    for num in label:
+        counter[num] += 1
+
+    counter = counter.astype('float') / total_size
+    for i in range(len(counter)):
+        print(f'class {i}: {counter[i] * 100:.4f}')
+
