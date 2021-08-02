@@ -1,5 +1,6 @@
 import torch
 from torch.utils.data import DataLoader
+import tqdm
 
 from models import ResNet
 from dataloader import RetinopathyLoader
@@ -18,7 +19,7 @@ def evaluate(model, loader, loss):
     accumulate_loss = 0
     corrects = 0
 
-    for (img, label) in loader:
+    for (img, label) in tqdm(loader):
         img = img.to(device)
         label = label.to(device)
 
