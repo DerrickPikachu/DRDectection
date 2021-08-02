@@ -3,6 +3,7 @@ import torch
 
 import parameter
 from parameter import *
+from tqdm import tqdm
 
 
 def train_model(model, dataloader, loss_f, optimizer, epochs):
@@ -35,7 +36,7 @@ def train_model(model, dataloader, loss_f, optimizer, epochs):
             size = len(dataloader[mode].dataset)
 
             # Training or evaluating start
-            for batch, (img, label) in enumerate(dataloader[mode]):
+            for img, label in tqdm(dataloader[mode]):
                 img = img.to(device)
                 label = label.to(device)
                 optimizer.zero_grad()
