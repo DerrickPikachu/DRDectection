@@ -34,7 +34,7 @@ class ConfusionMatrix:
         # plt.tight_layout()
         plt.ylabel('True label')
         plt.xlabel('Predicted label')
-        plt.show()
+        plt.savefig('confusionMat.png', bbox_inches='tight')
 
 
 if __name__ == "__main__":
