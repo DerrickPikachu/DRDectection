@@ -19,10 +19,10 @@ def train_model(model, dataloader, loss_f, optimizer, epochs):
         print('Epoch: {}/{}'.format(e, epochs))
         print('-' * 10)
 
-        # if (e - 1) == 6:
-        #    lr = 0.0005
-        #    optimizer = torch.optim.SGD(model.parameters(), lr=lr,
-        #                                momentum=parameter.momentum, weight_decay=parameter.weight_decay)
+        if (e - 1) == 10:
+           lr = 0.0008
+           optimizer = torch.optim.SGD(model.parameters(), lr=lr,
+                                       momentum=parameter.momentum, weight_decay=parameter.weight_decay)
 
         for mode in ['train', 'test']:
             # Change model mode

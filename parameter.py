@@ -10,7 +10,7 @@ device = 'cuda' if torch.cuda.is_available() else 'cpu'
 # Test
 # epoch = 1
 
-epoch = 5
+epoch = 30
 batch_size = 4
 learning_rate = 0.001
 loss_fn = torch.nn.CrossEntropyLoss()
@@ -34,16 +34,16 @@ pretest_transform = transforms.Compose([
 ])
 train_transform = transforms.Compose([
     ImgToTorch(),
-    transforms.Resize(224),
+    # transforms.Resize(224),
     # transforms.RandomHorizontalFlip(),
-    # transforms.RandomVerticalFlip(),
-    # transforms.RandomRotation(360),
+    transforms.RandomVerticalFlip(),
+    transforms.RandomRotation(360),
     # transforms.RandomCrop(224),
     transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
 ])
 test_transform = transforms.Compose([
     ImgToTorch(),
-    transforms.Resize(224),
+    # transforms.Resize(224),
     # transforms.CenterCrop(224),
     transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
 ])

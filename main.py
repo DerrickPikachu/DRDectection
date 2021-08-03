@@ -12,8 +12,8 @@ from models import ResNet
 
 
 if __name__ == '__main__':
-    # model = torch.load('tem_model.pth')
-    model = ResNet(50, False, False)
+    model = torch.load('model_80p.pth')
+    # model = ResNet(18, True, False)
     model = model.to(device)
     print(model)
 
@@ -25,9 +25,9 @@ if __name__ == '__main__':
     # model, record = train_model_pretrain(model, loss_fn, optimizer, epoch)
 
     # Write the record into file
-    file = open('50_nonpretrained_record', 'w')
+    file = open('rotation_record', 'w')
     file.write(f'{record}')
     file.close()
 
     # Save the trained model
-    torch.save(model, 'resnet50_nonpretrained.pth')
+    torch.save(model, 'model.pth')
