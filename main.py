@@ -12,8 +12,8 @@ from models import ResNet
 
 
 if __name__ == '__main__':
-    model = torch.load('model_80p.pth')
-    # model = ResNet(18, True, False)
+    # model = torch.load('model_80p.pth')
+    model = ResNet(18, True, False)
     model = model.to(device)
     print(model)
 
