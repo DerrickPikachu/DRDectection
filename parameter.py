@@ -12,7 +12,7 @@ device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
 epoch = 20
 batch_size = 4
-learning_rate = 0.001
+learning_rate = 0.007
 loss_fn = torch.nn.CrossEntropyLoss()
 
 # TODO: Need to survey the effect of these parameters
