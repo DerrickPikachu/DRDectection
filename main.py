@@ -30,4 +30,4 @@ if __name__ == '__main__':
     file.close()
 
     # Save the trained model
-    torch.save(model, 'resnet50_pretrained.pth')
+    torch.save(model, 'resnet50_nonpretrained.pth')
