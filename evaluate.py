@@ -32,7 +32,7 @@ def evaluate(model, loader, loss):
             pred = model(img.float())
             loss_val = loss(pred, label)
 
-        for i in range(pred):
+        for i in range(len(pred)):
             pred_list.append(pred[i].argmax().item())
             label_list.append(label[i].item())
 
