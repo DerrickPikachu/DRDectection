@@ -13,7 +13,7 @@ from models import ResNet
 
 if __name__ == '__main__':
     # model = torch.load('tem_model.pth')
-    model = ResNet(50, True, False)
+    model = ResNet(50, False, False)
     model = model.to(device)
     print(model)
 
@@ -25,7 +25,7 @@ if __name__ == '__main__':
     # model, record = train_model_pretrain(model, loss_fn, optimizer, epoch)
 
     # Write the record into file
-    file = open('50_pretrained_record', 'w')
+    file = open('50_nonpretrained_record', 'w')
     file.write(f'{record}')
     file.close()
 
