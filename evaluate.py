@@ -47,7 +47,7 @@ def evaluate(model, loader, loss):
 
 
 if __name__ == "__main__":
-    model = torch.load('model_80p.pth')
+    model = torch.load('resnet50_epo20.pth')
     model = model.to(device)
     preds, labels = evaluate(model, loader['test'], loss_fn)
     confusion_mat = ConfusionMatrix(preds, labels, 5)
